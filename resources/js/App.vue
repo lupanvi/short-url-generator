@@ -8,7 +8,7 @@ const errors = ref({})
 
 const generateShortUrl = async () => {
     let dataForm = {
-        url: urlInput.value,
+        short_url: urlInput.value,
         _token: document
             .querySelector('meta[name="csrf-token"]')
             .getAttribute("content"),
@@ -18,7 +18,7 @@ const generateShortUrl = async () => {
 
     try {
         const { data } = await axios.post("/urls", dataForm)        
-        urlsList.push(data.data.short_url)
+        urlsList.push(data.short_url)
     } catch (e) {
         if (e.response.status === 422) {
             errors.value = e.response.data.errors;
